@@ -1,10 +1,8 @@
-jsonSchema4s
-============
+# jsonSchema4s
 
 jsonSchema4s is a simple library for generating a simple json schema from a case class with http://json-schema.org/ format.
 
-Usage
-============
+## Usage
 
 The base method is `JsonSchemaGenerator.generateSchema` and it returns a `JsonSchemaElement` ready to be serialized to json to generate the respecting json schema.
 
@@ -21,11 +19,16 @@ val schema: JsonSchemaElement = JsonSchemaGenerator.generateSchema[ACaseClass]
 // You need to use your own scala json serializer
 val schemaAsJson = someSerializer.serialize(schema)
 ...
-
 ```
 
+## Supported Types
 
-WARNING
-============
+The library supports case class, Option[A], Seq[A], String, Boolean, Int, BigDecimal.
+
+These were the only ones implemented just by the need
+
+The library doesn't support recursive types, it may enter on loop :D
+
+## WARNING
 
 It's experimental due to scala reflection universal api. The recommended use is for documentation purposes.
