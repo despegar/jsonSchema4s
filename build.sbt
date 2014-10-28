@@ -2,7 +2,7 @@ organization := "com.despegar.library"
 
 name := "jsonschema4s"
 
-version := "0.1-SNAPSHOT"
+version := "0.1"
 
 libraryDependencies += "org.scala-lang" % "scala-reflect" % "2.10.2"
 
