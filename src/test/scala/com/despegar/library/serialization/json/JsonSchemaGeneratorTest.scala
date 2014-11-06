@@ -36,7 +36,7 @@ class JsonSchemaGeneratorTest extends FunSpecLike with MustMatchers {
     
     it("must work with a parametrized case class") {
       val actual = JsonSchemaGenerator.generateSchema[ParametrizedClass[Int, String]]
-      val expected = JsonSchemaObject(Map("other" -> JsonSchemaPrimitive(JsonSchemaType.String), 
+      val expected = JsonSchemaObject(Map("other" -> JsonSchemaArray(JsonSchemaPrimitive(JsonSchemaType.String)), 
           "some" -> JsonSchemaPrimitive(JsonSchemaType.Integer)), Seq("other", "some"))
       actual mustEqual expected
     }
@@ -46,5 +46,5 @@ class JsonSchemaGeneratorTest extends FunSpecLike with MustMatchers {
 object JsonSchemaGeneratorTest {
   case class Person(name: String, phones: Seq[Int], job: Option[Job])
   case class Job(description: String, company: String)
-  case class ParametrizedClass[A, B](some: A, other: B)
+  case class ParametrizedClass[A, B](some: A, other: Seq[B])
 }
