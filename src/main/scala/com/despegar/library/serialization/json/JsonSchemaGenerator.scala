@@ -23,8 +23,9 @@ trait JsonSchemaGenerator {
       val realTpe = tpe match { case TypeRef(_, _, Seq(realTpe)) => realTpe }
       JsonSchemaArray(generateSchemaFromType(realTpe))
     case _ if (tpe <:< typeOf[Product]) =>
+      val typeParametersMap = tpe match { case TypeRef(a, b, c) => b.asClass.typeParams.map(_.name.toString).zip(c).toMap }
       val fields = tpe.members.collect { case m: MethodSymbol if m.isGetter => m }.toSeq
-      val schemaFields = fields.map(f => (f.name.toString, generateSchemaFromType(f.returnType)))
+      val schemaFields = fields.map(f => (f.name.toString, generateSchemaFromType(typeParametersMap.get(f.returnType.toString).getOrElse(f.returnType))))
       val required = schemaFields.collect { case (name, schema) if !schema.isInstanceOf[JsonSchemaOption] => name }
       val finalSchemaFields = schemaFields.map {
         case (name, JsonSchemaOption(real)) => (name, real)
