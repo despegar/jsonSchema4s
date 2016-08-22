@@ -23,11 +23,9 @@ val schemaAsJson = someSerializer.serialize(schema)
 
 ## Supported Types
 
-The library supports case class, Option[A], Seq[A], String, Boolean, Int, BigDecimal.
+The library supports case class, Option[A], Seq[A], String, Boolean, Int, Long, BigDecimal.
 
 These were the only ones implemented just by the need
-
-The library doesn't support recursive types, it may enter on loop :D
 
 ## WARNING
 
